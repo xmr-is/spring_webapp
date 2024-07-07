@@ -1,92 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://www.thymeleaf.org" lang="ja">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--<link rel="stylesheet" type="text/css" th:href="@{/signin.css}" />-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>ログイン</title>
+    <title>Login</title>
+    <!-- Bootstrap core CSS -->
+    <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="login.css" rel="stylesheet">
 </head>
-<body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<div class="form">
 
-    <ul class="tab-group">
-        <li class="tab active"><a th:href="@{/signup}">Sign Up</a></li>
-        <li class="tab"><a th:href="@{/login}">Log In</a></li>
-    </ul>
+<body class="text-center">
+<div class="fixed-top container">
+    <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        </a>
 
-    <div class="tab-content">
-        <div id="registMember">
-            <h1>メンバー登録</h1>
+        <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+            <li><a href="#" class="nav-link px-2 link-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Features</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">FAQs</a></li>
+            <li><a href="#" class="nav-link px-2 link-dark">About</a></li>
+        </ul>
 
-            <form th:action="@{/registMember}" method="post">
+        <div class="col-md-3 text-end">
+            <button type="button" class="btn btn-outline-primary me-2 d-none">Login</button>
+            <button type="button" class="btn btn-primary">Sign-up</button>
+        </div>
+    </header>
+</div>
 
-                <div class="top-row">
-                    <div class="field-wrap">
-                        <label>
-                            姓<span class="req">*</span>
-                        </label>
-                        <input type="text" required autocomplete="off" />
-                    </div>
+<!-- Bootstrap Icons -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
 
-                    <div class="field-wrap">
-                        <label>
-                            名<span class="req">*</span>
-                        </label>
-                        <input type="text" required autocomplete="off"/>
-                    </div>
-                </div>
+<main class="form-login">
+    <form th:action="@{/goMenu}" th:object="${loginForm}" method="post">
+        <h1 class="h3 mb-3 fw-normal">Login</h1>
 
-                <div class="field-wrap">
-                    <label>
-                        ESQ ID<span class="req">*</span>
-                    </label>
-                    <input type="text" required autocomplete="off"/>
-                </div>
-
-                <div class="field-wrap">
-                    <label>
-                        Password<span class="req">*</span>
-                    </label>
-                    <input type="password" required autocomplete="off"/>
-                </div>
-
-                <button type="submit" class="button button-block"/>メンバー登録</button>
-
-            </form>
-
+        <div class="form-floating">
+            <input type="text" class="form-control" id="floatingInput" placeholder="li0000" required autocomplete="off" th:field="*{esqId}">
+            <label for="floatingInput"><span class="bi bi-person"></span> ESQ ID</label>
+<!--            <div id="esqIdHelpBlock" class="form-text">-->
+<!--                不適切なESQIDです。-->
+<!--            </div>-->
         </div>
 
-        <div id="login">
-            <h1>ログイン</h1>
+        <br>
 
-            <form th:action="@{/logIn}" method="post">
-
-                <div class="field-wrap">
-                    <label>
-                        ESQ ID<span class="req">*</span>
-                    </label>
-                    <input type="text"required autocomplete="off"/>
-                </div>
-
-                <div class="field-wrap">
-                    <label>
-                        Password<span class="req">*</span>
-                    </label>
-                    <input type="password"required autocomplete="off"/>
-                </div>
-
-                <p class="forgot"><a th:href="@{/resetPassword}">Forgot Password?</a></p>
-
-                <button class="button button-block"/>ログイン</button>
-
-            </form>
-
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" aria-describedby="passwordHelpBlock" required autocomplete="off" th:field="*{password}">
+            <label for="floatingPassword"><span class="bi bi-lock"></span> Password</label>
+<!--            <div id="passwordHelpBlock" class="form-text" >-->
+<!--                不適切なパスワードです。-->
+<!--            </div>-->
         </div>
 
-    </div><!-- tab-content -->
+        <br>
 
-</div> <!-- /form -->
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember Me
+            </label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
+
+
+        <div class="forgot">
+            <p><a th:href="@{/resetPassword}">Forgot Password?</a></p>
+        </div>
+
+        <div class="border-bottom"></div>
+
+        <div class="create-new-account">
+            <p><a th:href="@{/createNewAccount}">Create New Account</a></p>
+        </div>
+<!--        <p class="mt-5 mb-3 text-muted">Adv. Sys. G-1 No.1</p>-->
+    </form>
+</main>
+
+
+
 </body>
 </html>
